@@ -1,10 +1,11 @@
 import tkinter 
 from tkinter import * 
 from tkinter import messagebox 
+
 import json
 import difflib
 def hello():
-
+    
 	user_txt=entry_1.get()
 	user_txt=str(user_txt)            #String converted form of Entered Text
 
@@ -52,15 +53,15 @@ def hello():
 		button_reset.destroy()  
 
 root=Tk()
-root.geometry("500x250")
-label_1=Label(root,text='Welcome to my Window',bg='red',font='70')
+root.geometry("400x400")
+label_1=Label(root,text='Welcome to my Window',bg='red',font='70').pack(pady=10);
 entry_1=Entry(root)
 label_2=Label(root,text='Dictionary A to Z',bg='red',font='70')
 button_1=Button(root,text='Enter',command=hello)
 
 
-label_1.grid(row=0,column=10)
-label_2.grid(row=1,column=10)
-entry_1.grid(row=2,column=10)
-button_1.grid(row=3,column=10)
+# #label_1.grid(row=0,column=10)
+# label_2.grid(row=1,column=10)
+# entry_1.grid(row=2,column=10)
+# button_1.grid(row=3,column=10)
 root.mainloop()
