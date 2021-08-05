@@ -4,8 +4,11 @@ import time
 import difflib
 root = Tk()
 root.geometry("400x400");
+root1=Tk()
+root1.geometry("400x400");
 
 def dict():
+    
     meaning.config(text="");
     doyoumeaning.config(text="")
     
@@ -41,13 +44,13 @@ word = Entry(frame, font=("Helvetica 15 bold"))
 word.pack()
 frame.pack(pady=10)
 
-frame0= Frame(root)
+frame0= Frame(root1)
 Label(frame0, text="", font=("Helvetica 10 bold")).pack(side=LEFT)
 doyoumeaning = Label(frame0, text="", font=("Helvetica 10"))
 doyoumeaning.pack()
 frame0.pack(pady=10)
 
-frame1 = Frame(root)
+frame1 = Frame(root1)
 Label(frame1, text="Meaning:- ", font=("Helvetica 10 bold")).pack(side=LEFT)
 meaning = Label(frame1, text="", font=("Helvetica 10"))
 meaning.pack()
