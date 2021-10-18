@@ -15,7 +15,8 @@ def dict():
     user_txt=word.get()
     user_txt=str(user_txt)
     f=open('076 data.json') #opening the json file
-    data=json.load(f)       #loading all the contents
+    data=json.load(f)    
+      #loading all the contents
     data1=data              #data1 is dictionary.We have to lower the keys of the dictionary
     data1 = {k.lower(): v for k, v in data1.items()} #Here,we set the keys of dictionary to lower case
     user_txt=user_txt.lower()
@@ -25,9 +26,9 @@ def dict():
          doyoumeaning.config(text='Do you mean '+a[0]+' ?');
          meaning.config(text=data1[a[0]][0])
         except:
-         doyoumeaning.config(text='Not Found.....')
-         
-         quit()     
+            doyoumeaning.config(text='Not Found.....')
+            time.sleep(2)
+            quit()     
     else:
         
         meaning.config(text=data1[user_txt][0])
