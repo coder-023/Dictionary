@@ -4,11 +4,23 @@ import time
 import difflib
 root = Tk()
 root.geometry("400x400");
-root1=Tk()
-root1.geometry("400x400");
+# root1=Tk()
+# root1.geometry("400x400");
 
 def dict():
+    newWindow=Toplevel(root)
+    newWindow.title("Meaning Section")
+    frame0= Frame(newWindow)
+    Label(frame0, text="", font=("Helvetica 10 bold")).pack(side=LEFT)
+    doyoumeaning = Label(frame0, text="", font=("Helvetica 10"))
+    doyoumeaning.pack()
+    frame0.pack(pady=10)
     
+    frame1 = Frame(newWindow)
+    Label(frame1, text="Meaning:- ", font=("Helvetica 10 bold")).pack(side=LEFT)
+    meaning = Label(frame1, text="", font=("Helvetica 10"))
+    meaning.pack()
+    frame1.pack(pady=10)
     meaning.config(text="");
     doyoumeaning.config(text="")
     
@@ -27,6 +39,7 @@ def dict():
          meaning.config(text=data1[a[0]][0])
         except:
             doyoumeaning.config(text='Not Found.....')
+            
             time.sleep(2)
             quit()     
     else:
@@ -45,17 +58,7 @@ word = Entry(frame, font=("Helvetica 15 bold"))
 word.pack()
 frame.pack(pady=10)
 
-frame0= Frame(root1)
-Label(frame0, text="", font=("Helvetica 10 bold")).pack(side=LEFT)
-doyoumeaning = Label(frame0, text="", font=("Helvetica 10"))
-doyoumeaning.pack()
-frame0.pack(pady=10)
 
-frame1 = Frame(root1)
-Label(frame1, text="Meaning:- ", font=("Helvetica 10 bold")).pack(side=LEFT)
-meaning = Label(frame1, text="", font=("Helvetica 10"))
-meaning.pack()
-frame1.pack(pady=10)
 
 
 Button(root, text="Submit", font=("Helvetica 15 bold"), command=dict).pack()
