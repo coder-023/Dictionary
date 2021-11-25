@@ -10,22 +10,44 @@ frame = Frame(root)
 #from dictionary1 import main
 username_list=['mukul','devashish','omkar']
 password_list=['mukul123','devashish123','omkar123']
+def loginvalidationreturn(username, password):
+    if(username in username_list and password in password_list):
+        return True
+    else:
+        return False    
+def check_wrd(word):
+    user_txt=word
+    print(user_txt)
+    f=open('076 data.json') #opening the json file
+    data=json.load(f)    
+      #loading all the contents
+    data1=data              #data1 is dictionary.We have to lower the keys of the dictionary
+    data1 = {k.lower(): v for k, v in data1.items()} #Here,we set the keys of dictionary to lower case
+    user_txt=user_txt.lower()
+    if(user_txt not in data1.keys()):
+        try:
+         a=difflib.get_close_matches(user_txt,data1,1) #compare the input string with the dictionary and only return 1 
+         
+         return True
+        except:
+            
+            return False
+            time.sleep(2)
+            quit()     
+    else:
+        
+        
+        return True
 def validateLogin(username, password):
-    if(username.get() in username_list and password.get() in password_list):
+    result=loginvalidationreturn(username.get(), password.get())
+    if(result==True):
         openNewWindow()
+            
     else:
         nw=Toplevel(root)
         Label(nw,text="Invalid username and/or password entered",font=("ComicSansMS 20 bold"),fg="Green").pack(pady=10);
         #root.destroy()
-        return  
-
-
-    
-    
-    
-    
-     
-
+        return False 
 	
 def openNewWindow():
     newWindow=Toplevel(root)
@@ -43,6 +65,7 @@ def openNewWindow():
     
     
 def dict(word):
+    print(str(word))
     newWindow=Toplevel(root)
     newWindow.title("Meaning Section")
     frame0= Frame(newWindow)
@@ -72,14 +95,16 @@ def dict(word):
          a=difflib.get_close_matches(user_txt,data1,1) #compare the input string with the dictionary and only return 1 
          doyoumeaning.config(text='Do you mean '+a[0]+' ?');
          meaning.config(text=data1[a[0]][0])
+         return True
         except:
             doyoumeaning.config(text='Not Found.....')
-            
+            return False
             time.sleep(2)
             quit()     
     else:
         
         meaning.config(text=data1[user_txt][0])
+        return True
     #Label(root,text="Dictionary",font=("ComicSansMS 10 bold"),fg="Blue").pack(pady=10);
 
 #window
@@ -89,12 +114,12 @@ root.title('Login Form')
 #username label and text entry box
 usernameLabel = Label(root, text="User Name",font=("ComicSansMS 20 bold")).grid(row=5, column=6)
 username = StringVar()
-usernameEntry = Entry(root, textvariable=username).grid(row=5, column=8)  
+usernameEntry = Entry(root, textvariable=username, font=("Helvetica 15 bold")).grid(row=5, column=8)  
 
 #password label and password entry box
 passwordLabel = Label(root,text="Password",font=("ComicSansMS 20 bold")).grid(row=6, column=6)  
 password = StringVar()
-passwordEntry = Entry(root, textvariable=password, show='*').grid(row=6, column=8)  
+passwordEntry = Entry(root, textvariable=password, show='*', font=("Helvetica 15 bold")).grid(row=6, column=8)  
 
 validateLogin = partial(validateLogin, username, password)
 
