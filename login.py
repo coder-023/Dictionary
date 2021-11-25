@@ -1,13 +1,20 @@
 from tkinter import *
 from functools import partial
+
 import json
 import time
 import difflib
 root = Tk()
 root.geometry("400x400");
-# root1=Tk()
-# root1.geometry("400x400");
-
+frame = Frame(root)
+#from dictionary1 import main
+username_list=['mukul','devashish','omkar']
+password_list=['mukul123','devashish123','omkar123']
+def loginvalidationreturn(username, password):
+    if(username in username_list and password in password_list):
+        return True
+    else:
+        return False    
 def check_wrd(word):
     user_txt=word
     print(user_txt)
@@ -31,8 +38,34 @@ def check_wrd(word):
         
         
         return True
+def validateLogin(username, password):
+    result=loginvalidationreturn(username.get(), password.get())
+    if(result==True):
+        openNewWindow()
+            
+    else:
+        nw=Toplevel(root)
+        Label(nw,text="Invalid username and/or password entered",font=("ComicSansMS 20 bold"),fg="Green").pack(pady=10);
+        #root.destroy()
+        return False 
+	
+def openNewWindow():
+    newWindow=Toplevel(root)
+    newWindow.title("Meaning Section")
+    Label(newWindow,text="*******Dictionary*******",font=("ComicSansMS 20 bold"),fg="Green").pack(pady=10);
+    frame = Frame(newWindow)
+    Label(frame, text="Type Word:", font=("Helvetica 15 bold")).pack(side=LEFT)
+    word = Entry(frame, font=("Helvetica 15 bold"))
+    word.pack()
+    frame.pack(pady=10)
+    
+    Button(newWindow, text="Submit", font=("Helvetica 15 bold"), command=partial(dict,word)).pack()
 
+# def dict(word):
+    
+    
 def dict(word):
+    print(str(word))
     newWindow=Toplevel(root)
     newWindow.title("Meaning Section")
     frame0= Frame(newWindow)
@@ -48,10 +81,9 @@ def dict(word):
     frame1.pack(pady=10)
     meaning.config(text="");
     doyoumeaning.config(text="")
-    print(type(word))
-    #user_txt=word.get()
-    user_txt=word
-    print(user_txt)
+    
+    user_txt=word.get()
+    user_txt=str(user_txt)
     f=open('076 data.json') #opening the json file
     data=json.load(f)    
       #loading all the contents
@@ -75,30 +107,23 @@ def dict(word):
         return True
     #Label(root,text="Dictionary",font=("ComicSansMS 10 bold"),fg="Blue").pack(pady=10);
 
+#window
+ 
+root.title('Login Form')
 
+#username label and text entry box
+usernameLabel = Label(root, text="User Name",font=("ComicSansMS 20 bold")).grid(row=5, column=6)
+username = StringVar()
+usernameEntry = Entry(root, textvariable=username, font=("Helvetica 15 bold")).grid(row=5, column=8)  
 
+#password label and password entry box
+passwordLabel = Label(root,text="Password",font=("ComicSansMS 20 bold")).grid(row=6, column=6)  
+password = StringVar()
+passwordEntry = Entry(root, textvariable=password, show='*', font=("Helvetica 15 bold")).grid(row=6, column=8)  
 
-Label(root,text="*******Dictionary*******",font=("ComicSansMS 20 bold"),fg="Green").pack(pady=10);
-frame = Frame(root)
+validateLogin = partial(validateLogin, username, password)
 
-Label(frame, text="Type Word:", font=("Helvetica 15 bold")).pack(side=LEFT)
-word = Entry(frame, font=("Helvetica 15 bold"))
-#check(word.get())
-word.pack()
-frame.pack(pady=10)
+#login button
+loginButton = Button(root, text="Login", font=("ComicSansMS 20 bold"),command=validateLogin).grid(row=7, column=8)  
 
-
-
-
-Button(root, text="Submit", font=("Helvetica 15 bold"), command=partial(dict,str(word))).pack()
-
-
-
-
-
-
-
-
-
-
-root.mainloop();
+root.mainloop()
