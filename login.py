@@ -14,9 +14,10 @@ def validateLogin(username, password):
     if(username.get() in username_list and password.get() in password_list):
         openNewWindow()
     else:
-        print("return")
-        root.destroy()
-        return
+        nw=Toplevel(root)
+        Label(nw,text="Invalid username and/or password entered",font=("ComicSansMS 20 bold"),fg="Green").pack(pady=10);
+        #root.destroy()
+        return  
 
 
     
@@ -83,21 +84,21 @@ def dict(word):
 
 #window
  
-root.title('Tkinter Login Form')
+root.title('Login Form')
 
 #username label and text entry box
-usernameLabel = Label(root, text="User Name").grid(row=5, column=6)
+usernameLabel = Label(root, text="User Name",font=("ComicSansMS 20 bold")).grid(row=5, column=6)
 username = StringVar()
 usernameEntry = Entry(root, textvariable=username).grid(row=5, column=8)  
 
 #password label and password entry box
-passwordLabel = Label(root,text="Password").grid(row=6, column=6)  
+passwordLabel = Label(root,text="Password",font=("ComicSansMS 20 bold")).grid(row=6, column=6)  
 password = StringVar()
 passwordEntry = Entry(root, textvariable=password, show='*').grid(row=6, column=8)  
 
 validateLogin = partial(validateLogin, username, password)
 
 #login button
-loginButton = Button(root, text="Login", command=validateLogin).grid(row=7, column=4)  
+loginButton = Button(root, text="Login", font=("ComicSansMS 20 bold"),command=validateLogin).grid(row=7, column=8)  
 
 root.mainloop()
