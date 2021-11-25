@@ -1,13 +1,46 @@
 from tkinter import *
 from functools import partial
+
 import json
 import time
 import difflib
 root = Tk()
 root.geometry("400x400");
-# root1=Tk()
-# root1.geometry("400x400");
+frame = Frame(root)
+#from dictionary1 import main
+username_list=['mukul','devashish','omkar']
+password_list=['mukul123','devashish123','omkar123']
+def validateLogin(username, password):
+    if(username.get() in username_list and password.get() in password_list):
+        openNewWindow()
+    else:
+        print("return")
+        root.destroy()
+        return
 
+
+    
+    
+    
+    
+     
+
+	
+def openNewWindow():
+    newWindow=Toplevel(root)
+    newWindow.title("Meaning Section")
+    Label(newWindow,text="*******Dictionary*******",font=("ComicSansMS 20 bold"),fg="Green").pack(pady=10);
+    frame = Frame(newWindow)
+    Label(frame, text="Type Word:", font=("Helvetica 15 bold")).pack(side=LEFT)
+    word = Entry(frame, font=("Helvetica 15 bold"))
+    word.pack()
+    frame.pack(pady=10)
+    
+    Button(newWindow, text="Submit", font=("Helvetica 15 bold"), command=partial(dict,word)).pack()
+
+# def dict(word):
+    
+    
 def dict(word):
     newWindow=Toplevel(root)
     newWindow.title("Meaning Section")
@@ -48,29 +81,23 @@ def dict(word):
         meaning.config(text=data1[user_txt][0])
     #Label(root,text="Dictionary",font=("ComicSansMS 10 bold"),fg="Blue").pack(pady=10);
 
+#window
+ 
+root.title('Tkinter Login Form')
 
+#username label and text entry box
+usernameLabel = Label(root, text="User Name").grid(row=5, column=6)
+username = StringVar()
+usernameEntry = Entry(root, textvariable=username).grid(row=5, column=8)  
 
+#password label and password entry box
+passwordLabel = Label(root,text="Password").grid(row=6, column=6)  
+password = StringVar()
+passwordEntry = Entry(root, textvariable=password, show='*').grid(row=6, column=8)  
 
-Label(root,text="*******Dictionary*******",font=("ComicSansMS 20 bold"),fg="Green").pack(pady=10);
-frame = Frame(root)
+validateLogin = partial(validateLogin, username, password)
 
-Label(frame, text="Type Word:", font=("Helvetica 15 bold")).pack(side=LEFT)
-word = Entry(frame, font=("Helvetica 15 bold"))
-word.pack()
-frame.pack(pady=10)
+#login button
+loginButton = Button(root, text="Login", command=validateLogin).grid(row=7, column=4)  
 
-
-
-
-Button(root, text="Submit", font=("Helvetica 15 bold"), command=partial(dict,word)).pack()
-
-
-
-
-
-
-
-
-
-
-root.mainloop();
+root.mainloop()
