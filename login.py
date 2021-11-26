@@ -5,7 +5,7 @@ import json
 import time
 import difflib
 root = Tk()
-root.geometry("400x400");
+root.geometry("600x600");
 frame = Frame(root)
 #from dictionary1 import main
 username_list=['mukul','devashish','omkar']
@@ -110,7 +110,7 @@ def dict(word):
 #window
  
 root.title('Login Form')
-
+title=Label(root,text='Welcome to A-Z Dictionary.',font=("ComicSansMS 20 bold")).grid(row=1, column=8)
 #username label and text entry box
 usernameLabel = Label(root, text="User Name",font=("ComicSansMS 20 bold")).grid(row=5, column=6)
 username = StringVar()
