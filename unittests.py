@@ -18,6 +18,8 @@ class TestMyStuff(unittest.TestCase):
         self.assertEqual(True,login.check_wrd("rain"))
     def test_6(self):
         self.assertEqual(True,login.check_wrd("qwe"))
+    def test_7(self):
+        self.assertEqual(False,login.check_wrd("4"))
     
 
 
